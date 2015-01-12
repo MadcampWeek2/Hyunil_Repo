@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">마카오톡</string>
+    <string name="title_section1">친구</string>
+    <string name="title_section2">채팅</string>
+	<string name="title_section3">친구찾기</string>
+	<string name="title_section4">더보기</string>
+	
+	<string name="descr_profile_img">Profile Image</string>
+</resources>
