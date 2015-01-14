@@ -5,16 +5,42 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="15"
         android:targetSdkVersion="21" />
-
+    
+    <!-- Internet access. send registration ID to 3rd party server -->    
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Register and receive messages -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <!-- Google account -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- Keep processor from sleeping while receiving -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Prevent others apps from receiving -->
+    <permission android:name="com.example.makaotalk.permission.C2D_MESSAGE"
+        android:protectionLevel="signature"/>
+    <uses-permission android:name="com.example.makaotalk.permission.C2D_MESSAGE" />
     
     <application
         android:allowBackup="true"
+        android:name=".MTApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+        
+        <receiver
+            android:name=".gcm.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.example.makaotalk" />
+            </intent-filter>
+        </receiver>
+        
+        <service android:name=".gcm.GcmIntentService" />
+        
         <activity
             android:name="com.example.makaotalk.activity.MainActivity"
             android:label="@string/app_name" >
@@ -23,6 +49,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
     </application>
 
 </manifest>
